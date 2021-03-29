@@ -69,8 +69,9 @@ public class Swarm {
                 oldEval = bestValue;
 
                 final int iteration = i;
+                final double value = bestValue;
                 Platform.runLater(() -> {
-                    logTextArea.appendText("Najlepszy wynik (Iteracja " + (iteration + 1) + "): " + bestValue + separator);
+                    logTextArea.appendText("Najlepszy wynik (Iteracja " + (iteration + 1) + "): " + value + separator);
                 });
             }
 
