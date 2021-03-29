@@ -57,7 +57,7 @@ public class Swarm {
             logTextArea.appendText("Współczynnik dążenia do najlepszego globalnego rozwiązania: " + String.format("%.2f", socialCoefficient) + separator + separator);
 
             logTextArea.appendText("Funckja: " + function.getName() + separator);
-            logTextArea.appendText("Liczba cząstek: " + particlesNumber + separator);
+            logTextArea.appendText("Liczba cząsteczek: " + particlesNumber + separator);
             logTextArea.appendText("Liczba iteracji (epochs): " + epochs + separator + separator);
             logTextArea.appendText("START:" + separator);
             logTextArea.appendText("Najlepszy wynik (Iteracja " + 0 + "): " + bestValue + separator);

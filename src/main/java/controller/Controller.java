@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.UnaryOperator;
 
 public class Controller {
 
@@ -92,6 +93,20 @@ public class Controller {
                         "%.2f", socialSlider.valueProperty()
                 )
         );
+
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String text = change.getText();
+            if (text.matches("[0-9]*")) {
+                return change;
+            }
+
+            return null;
+        };
+        TextFormatter<String> textFormatterParticles = new TextFormatter<>(filter);
+        particlesTextField.setTextFormatter(textFormatterParticles);
+
+        TextFormatter<String> textFormatterEpochs = new TextFormatter<>(filter);
+        epochsTextField.setTextFormatter(textFormatterEpochs);
     }
 
     @FXML
