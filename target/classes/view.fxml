@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+    <children>
+        <Button fx:id="startButton" layoutX="265.0" layoutY="153.0" mnemonicParsing="false"
+                onAction="#startButtonOnAction" prefHeight="31.0" prefWidth="80.0" text="Start"/>
+        <Button fx:id="saveButton" layoutX="32.0" layoutY="544.0" mnemonicParsing="false" onAction="#saveButtonOnAction"
+                prefHeight="31.0" prefWidth="80.0" text="Save"/>
+        <Slider fx:id="socialSlider" layoutX="265.0" layoutY="109.0"/>
+        <Slider fx:id="inertiaSlider" layoutX="362.0" layoutY="56.0"/>
+        <Slider fx:id="cognitiveSlider" layoutX="432.0" layoutY="110.0"/>
+        <TextField fx:id="epochsTextField" layoutX="115.0" layoutY="95.0" prefHeight="31.0" prefWidth="90.0"/>
+        <TextField fx:id="particlesTextField" layoutX="115.0" layoutY="153.0" prefHeight="31.0" prefWidth="90.0"/>
+        <TextArea fx:id="logTextArea" layoutX="34.0" layoutY="206.0" prefHeight="316.0" prefWidth="543.0"/>
+        <Label layoutX="39.0" layoutY="99.0" text="Epochs"/>
+        <Label layoutX="39.0" layoutY="158.0" text="Particles"/>
+        <Label layoutX="362.0" layoutY="30.0" text="Inertia"/>
+        <Label layoutX="439.0" layoutY="85.0" text="Cognitive"/>
+        <Label layoutX="271.0" layoutY="85.0" text="Social"/>
+        <ComboBox fx:id="functionsComboBox" layoutX="115.0" layoutY="25.0" prefHeight="31.0" prefWidth="175.0"/>
+        <Label layoutX="39.0" layoutY="30.0" text="Function"/>
+        <Label fx:id="inertiaValueLabel" layoutX="471.0" layoutY="30.0" text="0.0"/>
+        <Label fx:id="socialValueLabel" layoutX="373.0" layoutY="85.0" text="0.0"/>
+        <Label fx:id="cognitiveValueLabel" layoutX="542.0" layoutY="85.0" text="0.0"/>
+    </children>
+</AnchorPane>
