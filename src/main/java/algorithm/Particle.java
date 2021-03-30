@@ -37,9 +37,9 @@ class Particle {
     }
 
     private void setRandomPosition(int beginRange, int endRange) {
-        int x = rand(beginRange, endRange);
-        int y = rand(beginRange, endRange);
-        int z = rand(beginRange, endRange);
+        double x = Math.random() * (endRange - beginRange) + beginRange;
+        double y = Math.random() * (endRange - beginRange) + beginRange;
+        double z = Math.random() * (endRange - beginRange) + beginRange;
         position.set(x, y, z);
     }
 

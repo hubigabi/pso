@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.StringConverter;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +22,8 @@ public class Controller {
     private final static double MAX_INERTIA = 3.0;
     private final static double MAX_COGNITIVE = 3.0;
     private final static double MAX_SOCIAL = 3.0;
+
+    private final static int DECIMAL_PLACES = 6;
 
     @FXML
     private Button startButton;
@@ -59,10 +62,25 @@ public class Controller {
     public Label cognitiveValueLabel;
 
     @FXML
+    public Button clearButton;
+
+    @FXML
     public void initialize() {
         logTextArea.setEditable(false);
 
         FunctionType[] functionTypes = FunctionType.values();
+        functionsComboBox.setConverter(new StringConverter<FunctionType>() {
+            @Override
+            public String toString(FunctionType functionType) {
+                return functionType.getName();
+            }
+
+            @Override
+            public FunctionType fromString(String s) {
+                return null;
+            }
+        });
+
         functionsComboBox.setItems(FXCollections.observableArrayList(functionTypes));
         functionsComboBox.getSelectionModel().selectFirst();
 
@@ -107,6 +125,19 @@ public class Controller {
 
         TextFormatter<String> textFormatterEpochs = new TextFormatter<>(filter);
         epochsTextField.setTextFormatter(textFormatterEpochs);
+
+        startButton.disableProperty().bind(
+                Bindings.isEmpty(epochsTextField.textProperty())
+                        .or(Bindings.isEmpty(particlesTextField.textProperty()))
+        );
+
+        saveButton.disableProperty().bind(
+                Bindings.isEmpty(logTextArea.textProperty())
+        );
+
+        clearButton.disableProperty().bind(
+                Bindings.isEmpty(logTextArea.textProperty())
+        );
     }
 
     @FXML
@@ -133,9 +164,25 @@ public class Controller {
                 new FileOutputStream(fileName), StandardCharsets.UTF_8))) {
             Files.createDirectories(Paths.get(directory));
             writer.write(logTextArea.getText());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Created a new file");
+            alert.setHeaderText(null);
+            alert.setContentText("A file with logs has been saved to: " + System.lineSeparator() + fileName);
+            alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void clearButtonOnAction(ActionEvent actionEvent) {
+        logTextArea.clear();
+    }
+
+    public static String print(double x) {
+        return String.format("%." + DECIMAL_PLACES + "f", x);
+    }
+
 
 }

@@ -3,13 +3,9 @@ package algorithm;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
+
+import static controller.Controller.print;
 
 public class Swarm {
 
@@ -50,17 +46,18 @@ public class Swarm {
         double oldEval = bestValue;
 
         String separator = System.lineSeparator();
+        final double val = bestValue;
         Platform.runLater(() -> {
             logTextArea.appendText("Parametry:" + separator);
             logTextArea.appendText("Współczynnik bezwładności: " + String.format("%.2f", inertiaCoefficient) + separator);
             logTextArea.appendText("Współczynnik dążenia do najlepszego lokalnego rozwiązania: " + String.format("%.2f", cognitiveCoefficient) + separator);
             logTextArea.appendText("Współczynnik dążenia do najlepszego globalnego rozwiązania: " + String.format("%.2f", socialCoefficient) + separator + separator);
 
-            logTextArea.appendText("Funckja: " + function.getName() + separator);
+            logTextArea.appendText("Funkcja: " + function.getName() + separator);
             logTextArea.appendText("Liczba cząsteczek: " + particlesNumber + separator);
             logTextArea.appendText("Liczba iteracji (epochs): " + epochs + separator + separator);
             logTextArea.appendText("START:" + separator);
-            logTextArea.appendText("Najlepszy wynik (Iteracja " + 0 + "): " + bestValue + separator);
+            logTextArea.appendText("Najlepszy wynik (Iteracja " + 0 + "): " + print(val) + separator);
         });
 
         for (int i = 0; i < epochs; i++) {
@@ -71,7 +68,7 @@ public class Swarm {
                 final int iteration = i;
                 final double value = bestValue;
                 Platform.runLater(() -> {
-                    logTextArea.appendText("Najlepszy wynik (Iteracja " + (iteration + 1) + "): " + value + separator);
+                    logTextArea.appendText("Najlepszy wynik (Iteracja " + (iteration + 1) + "): " + print(value) + separator);
                 });
             }
 
@@ -88,9 +85,9 @@ public class Swarm {
 
         Platform.runLater(() -> {
             logTextArea.appendText(separator + "WYNIKI:" + separator);
-            logTextArea.appendText("Wartość x = " + bestPosition.getX() + separator);
-            logTextArea.appendText("Wartość y = " + bestPosition.getY() + separator);
-            logTextArea.appendText("Najlepszy wynik: " + bestValue + separator);
+            logTextArea.appendText("Wartość x = " + print(bestPosition.getX()) + separator);
+            logTextArea.appendText("Wartość y = " + print(bestPosition.getY()) + separator);
+            logTextArea.appendText("Najlepszy wynik: " + print(bestValue) + separator);
         });
     }
 
