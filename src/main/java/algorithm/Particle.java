@@ -12,7 +12,7 @@ class Particle {
 
     Particle(FunctionType function, int beginRange, int endRange) {
         if (beginRange >= endRange) {
-            throw new IllegalArgumentException("Błędne dane!");
+            throw new IllegalArgumentException("Wrong data!");
         }
         this.function = function;
         position = new Vector();

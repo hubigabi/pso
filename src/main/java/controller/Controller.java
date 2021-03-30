@@ -156,15 +156,15 @@ public class Controller {
     }
 
     @FXML
-    void saveButtonOnAction(ActionEvent event) {
+    void saveButtonOnAction(ActionEvent event) throws IOException {
         String directory = "log/";
         String fileName = directory + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss'.txt'").format(new Date());
+        Files.createDirectories(Paths.get(directory));
 
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(fileName), StandardCharsets.UTF_8))) {
-            Files.createDirectories(Paths.get(directory));
-            writer.write(logTextArea.getText());
 
+            writer.write(logTextArea.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Created a new file");
             alert.setHeaderText(null);
